@@ -73,7 +73,7 @@ const person_data: Ref<Application.Person> = ref({
 
 const name_place_rules: [(val: string) => string | boolean] = [
   (val) => {
-    const name_error = 'Недопустимый формат'
+    const name_error = 'Недопустимый формат имени'
     if (!val) {
       return false
     }
