@@ -1,0 +1,16 @@
+.link {
+    color: #1963E0;
+    ;
+    text-decoration: none;
+
+    &:link,
+    &:visited {
+        color: #1963E0;
+        ;
+    }
+
+    &:hover,
+    &:active {
+        color: #1963E0;
+    }
+}
