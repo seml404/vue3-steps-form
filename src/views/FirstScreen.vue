@@ -6,61 +6,33 @@
       <v-row>
         <v-col cols="12" md="4">
           <v-text-field
+            v-for="input in inputs.slice(0, 3)"
+            :key="input.label"
+            v-model="person_data[input.model]"
+            :rules="input.rules"
+            :label="input.label"
+            :placeholder="input.placeholder || input.label"
+            v-maska:[input.mask?input.mask:null]
+            :validate-on="input.validation || 'lazy blur'"
+            :required="input.required"
             @focus="() => form.resetValidation()"
             class="form__input"
-            v-model="person_data.second_name"
-            :rules="name_place_rules"
-            label="Фамилия*"
-            required
-            variant="outlined"
-          ></v-text-field>
-          <v-text-field
-            @focus="() => form.resetValidation()"
-            class="form__input"
-            v-model="person_data.middle_name"
-            :rules="name_place_rules"
-            label="Отчество"
-            variant="outlined"
-          ></v-text-field>
-          <v-text-field
-            @focus="() => form.resetValidation()"
-            class="form__input"
-            v-model="person_data.birth_place"
-            :rules="name_place_rules"
-            label="Страна места рождения"
-            required
             variant="outlined"
           ></v-text-field>
         </v-col>
         <v-col cols="12" md="4">
           <v-text-field
+            v-for="input in inputs.slice(3)"
+            :key="input.label"
+            v-model="person_data[input.model]"
+            :rules="input.rules"
+            :label="input.label"
+            :placeholder="input.placeholder || input.label"
+            v-maska:[input.mask?input.mask:null]
+            :validate-on="input.validation || 'lazy blur'"
             @focus="() => form.resetValidation()"
+            :required="input.required"
             class="form__input"
-            v-model="person_data.first_name"
-            :rules="name_place_rules"
-            label="Имя*"
-            required
-            variant="outlined"
-          ></v-text-field>
-          <v-text-field
-            class="form__input"
-            @focus="() => form.resetValidation()"
-            v-model="person_data.birth_date"
-            v-maska:[options]
-            label="Дата рождения"
-            placeholder="дд.мм.гггг"
-            required
-            :rules="date_rules"
-            variant="outlined"
-            validate-on="blur lazy"
-          ></v-text-field>
-          <v-text-field
-            @focus="() => form.resetValidation()"
-            class="form__input"
-            v-model="person_data.email"
-            :rules="email_rules"
-            label="Email"
-            required
             variant="outlined"
           ></v-text-field>
         </v-col>
@@ -84,11 +56,13 @@ export default {
 
 <script setup lang="ts">
 import { ref, computed, Ref } from 'vue'
+import type { Application } from '@/types/index'
 import { vMaska } from 'maska'
+import type { MaskOptions } from 'maska'
 import type { VForm } from 'vuetify/components'
 const form = ref()
 const valid = ref(false)
-const person_data = ref({
+const person_data: Ref<Application.Person> = ref({
   first_name: '',
   second_name: '',
   birth_date: '',
@@ -96,6 +70,7 @@ const person_data = ref({
   middle_name: '',
   email: ''
 })
+
 const name_place_rules: [(val: string) => string | boolean] = [
   (val) => {
     const name_error = 'Недопустимый формат'
@@ -158,8 +133,49 @@ const email_rules: [(val: string) => string | boolean] = [
     return true
   }
 ]
+const options: { [key: keyof Application.Person]: MaskOptions } = {
+  birth_date: { mask: '##.##.####' }
+}
+const inputs: Application.FormInput[] = [
+  {
+    model: 'second_name',
+    rules: name_place_rules,
+    label: 'Фамилия*',
+    required: true
+  },
+  {
+    model: 'middle_name',
+    rules: name_place_rules,
+    label: 'Отчество*',
+    required: true
+  },
+  {
+    model: 'birth_place',
+    rules: name_place_rules,
+    label: 'Страна места рождения*',
+    required: true
+  },
+  {
+    model: 'first_name',
+    rules: name_place_rules,
+    label: 'Имя*',
+    required: true
+  },
+  {
+    model: 'birth_date',
+    rules: date_rules,
+    label: 'Дата рождения*',
+    placeholder: 'дд.мм.гггг',
+    mask: options.birth_date,
+    required: true
+  },
+  {
+    model: 'email',
+    rules: email_rules,
+    label: 'Email'
+  }
+]
 
-const options = { mask: '##.##.####' }
 const agreement = ref(false)
 </script>
 
