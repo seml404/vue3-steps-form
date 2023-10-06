@@ -1,6 +1,6 @@
 <template>
   <v-form v-model="valid" class="form" ref="form">
-    <v-container>
+    <v-container class="container">
       <p class="form__title">Личные данные</p>
       <v-progress-linear class="form__progress" color="green" model-value="20"></v-progress-linear>
       <v-row>
@@ -193,5 +193,8 @@ const agreement = ref(false)
 
 .form__input {
   margin-bottom: 10px;
+}
+.container {
+  background: #fff;
 }
 </style>
