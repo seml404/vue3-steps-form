@@ -30,6 +30,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.step__header {
+  padding-bottom: 20px;
+}
 .step__title {
   text-align: center;
   padding: 6px;

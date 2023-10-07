@@ -1,8 +1,6 @@
 import { StepNamesEng } from '@/enums'
 import type { Application } from '@/types/index'
 
-export const steps_amount = 5
-
 export const steps: Application.Step[] = [
   {
     number: 1,
@@ -30,13 +28,15 @@ export const steps: Application.Step[] = [
     next_step_name: StepNamesEng.VALIDATION
   },
   {
-    number: 5,
+    number: 6,
     step_name: StepNamesEng.VALIDATION,
     next_step_name: StepNamesEng.SIGNED
   },
   {
-    number: 5,
+    number: 7,
     step_name: StepNamesEng.VALIDATION,
     next_step_name: null
   }
 ]
+
+export const steps_amount = steps.length
