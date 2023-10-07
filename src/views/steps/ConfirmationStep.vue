@@ -19,35 +19,44 @@
           ></v-text-field>
         </v-col>
       </v-row>
+      <div class="btn-container">
+        <BtnMain @click="validate">Проверить код</BtnMain>
+      </div>
+      <p>Отправить код повторно через</p>
+      <p>{{ sec_counter }} секунд</p>
     </v-container>
   </v-form>
 </template>
 
 <script lang="ts" setup>
 import { mock_code } from '@/mock'
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import type { Ref } from 'vue'
 import StepHeader from '@/components/steps/StepHeader.vue'
 import { steps } from '@/consts'
+const sec_counter: Ref<number> = ref(80)
+const sec_interval: Ref<number | null> = ref(null)
 const model_data: Ref<{ code: number | null }> = ref({ code: null })
-const code_rules: [(val: string) => string | boolean] = [
-  (val) => {
-    const code_error = 'Неверный код'
-    if (!val) {
-      return false
-    }
-    if (val.trim()) {
-      return val !== mock_code ? code_error : true
-    }
-    return false
-  }
-]
+const valid = ref(false)
 const input = {
   model: 'code',
-  rules: code_rules,
   label: 'Код*',
   required: true
 }
+
+const validate = () => {
+  console.log('validated')
+}
+
+onMounted(() => {
+  sec_interval.value = setInterval(() => {
+    if (sec_counter.value) sec_counter.value--
+  }, 1000)
+})
+
+onUnmounted(() => {
+  clearInterval(sec_interval.value)
+})
 </script>
 
 <script lang="ts">
@@ -59,5 +68,11 @@ export default {
 <style scoped lang="scss  ">
 .container {
   background: #fff;
+}
+
+.btn-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

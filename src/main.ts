@@ -3,6 +3,8 @@ import '@mdi/font/css/materialdesignicons.css'
 export default createVuetify({})
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import { vMaska } from 'maska'
+import { btn_main } from './components/UI'
 import App from './App.vue'
 import router from './router'
 import 'vuetify/styles'
@@ -12,7 +14,6 @@ import * as directives from 'vuetify/directives'
 
 // Translations provided by Vuetify
 import { ru } from 'vuetify/locale'
-
 const vuetify = createVuetify({
   components,
   directives,
@@ -27,4 +28,10 @@ const vuetify = createVuetify({
 
 const app = createApp(App)
 
-app.use(createPinia()).use(router).use(vuetify).mount('#app')
+app
+  .component('BtnMain', btn_main)
+  .directive('maska', vMaska)
+  .use(createPinia())
+  .use(router)
+  .use(vuetify)
+  .mount('#app')

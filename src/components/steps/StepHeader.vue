@@ -12,7 +12,7 @@
         }}
       </p>
     </div>
-    <div v-else>{{ step_alert }}</div>
+    <div v-else>{{ step.alert }}</div>
   </div>
 </template>
 

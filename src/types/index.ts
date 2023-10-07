@@ -39,4 +39,9 @@ export namespace Application {
     next_step_name?: StepNamesEng | null
     step_alert?: string
   }
+  export interface Term {
+    type: 'currency' | 'date' | 'rate'
+    title: string
+    value: number | string | unknown
+  }
 }
