@@ -1,14 +1,13 @@
 <template>
   <v-form v-model="valid" class="form" ref="form">
     <v-container class="container">
-      <p class="form__title">Личные данные</p>
-      <v-progress-linear class="form__progress" color="green" model-value="20"></v-progress-linear>
+      <StepHeader :step="steps[0]" />
       <v-row>
         <v-col cols="12" md="4">
           <v-text-field
             v-for="input in inputs.slice(0, 3)"
             :key="input.label"
-            v-model="person_data[input.model]"
+            v-model="model_data[input.model]"
             :rules="input.rules"
             :label="input.label"
             :placeholder="input.placeholder || input.label"
@@ -24,7 +23,7 @@
           <v-text-field
             v-for="input in inputs.slice(3)"
             :key="input.label"
-            v-model="person_data[input.model]"
+            v-model="model_data[input.model]"
             :rules="input.rules"
             :label="input.label"
             :placeholder="input.placeholder || input.label"
@@ -48,21 +47,19 @@
   </v-form>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'FirstStep'
-}
-</script>
-
 <script setup lang="ts">
-import { ref, computed, Ref } from 'vue'
+import StepHeader from '@/components/steps/StepHeader.vue'
+import { ref, computed } from 'vue'
+import { StepNames } from '@/enums'
+import type { Ref } from 'vue'
 import type { Application } from '@/types/index'
 import { vMaska } from 'maska'
 import type { MaskOptions } from 'maska'
 import type { VForm } from 'vuetify/components'
+import { steps } from '@/consts/'
 const form = ref()
 const valid = ref(false)
-const person_data: Ref<Application.Person> = ref({
+const model_data: Ref<Application.Person> = ref({
   first_name: '',
   second_name: '',
   birth_date: '',
@@ -87,7 +84,7 @@ const name_place_rules: [(val: string) => string | boolean] = [
 const date_rules: [(val: string) => string | boolean] = [
   (val) => {
     const date_error = 'Невалидная дата'
-    const { birth_date } = person_data.value
+    const { birth_date } = model_data.value
     if (!val) {
       return false
     }
@@ -179,17 +176,14 @@ const inputs: Application.FormInput[] = [
 const agreement = ref(false)
 </script>
 
+<script lang="ts">
+export default {
+  name: 'PersonalDataStep'
+}
+</script>
+
 <style scoped lang="scss">
-@import '@/assets/links.scss';
-.form__title {
-  text-align: center;
-  padding: 6px;
-  margin-bottom: 20px;
-}
-.form__progress {
-  margin-bottom: 20px;
-  border-radius: 10px;
-}
+@import '@/assets/scss/links.scss';
 
 .form__input {
   margin-bottom: 10px;

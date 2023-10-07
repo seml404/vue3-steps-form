@@ -3,13 +3,13 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <div class="general">
+  <div class="main_layout">
     <RouterView />
   </div>
 </template>
 
 <style scoped>
-.general {
+.main_layout {
   background: gray;
   height: 100vh;
   padding-top: 20px;

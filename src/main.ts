@@ -1,4 +1,4 @@
-import './assets/main.scss'
+import './assets/scss/main.scss'
 import '@mdi/font/css/materialdesignicons.css'
 export default createVuetify({})
 import { createApp } from 'vue'

@@ -1,5 +1,6 @@
 import type { MaskOptions } from 'maska'
 import type { VValidation } from 'vuetify/components'
+import { StepNamesEng } from '@/enums'
 
 export type InputValidation =
   | 'input'
@@ -24,11 +25,18 @@ export namespace Application {
   }
   export interface FormInput {
     model: keyof Person
-    rules: [(val: string) => string | boolean]
+    rules?: [(val: string) => string | boolean]
     label: string
     placeholder?: string
     mask?: MaskOptions
     validation?: InputValidation
     required?: boolean
+  }
+
+  export interface Step {
+    number: number
+    step_name: StepNamesEng
+    next_step_name?: StepNamesEng | null
+    step_alert?: string
   }
 }
