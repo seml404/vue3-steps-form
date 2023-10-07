@@ -11,9 +11,8 @@
             :label="input.label"
             :placeholder="input.placeholder || input.label"
             v-maska:[input.mask?input.mask:null]
-            :validate-on="input.validation || 'lazy blur'"
+            :validate-on="input.validation || 'input'"
             :required="input.required"
-            @focus="() => form.resetValidation()"
             class="form__input"
             variant="outlined"
           ></v-text-field>

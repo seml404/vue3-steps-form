@@ -12,9 +12,8 @@
             :label="input.label"
             :placeholder="input.placeholder || input.label"
             v-maska:[input.mask?input.mask:null]
-            :validate-on="input.validation || 'lazy blur'"
+            :validate-on="input.validation || 'input'"
             :required="input.required"
-            @focus="() => form.resetValidation()"
             class="form__input"
             variant="outlined"
           ></v-text-field>
@@ -28,8 +27,7 @@
             :label="input.label"
             :placeholder="input.placeholder || input.label"
             v-maska:[input.mask?input.mask:null]
-            :validate-on="input.validation || 'lazy blur'"
-            @focus="() => form.resetValidation()"
+            :validate-on="input.validation || 'input'"
             :required="input.required"
             class="form__input"
             variant="outlined"
@@ -53,7 +51,7 @@ import { ref, computed } from 'vue'
 import { StepNames } from '@/enums'
 import type { Ref } from 'vue'
 import type { Application } from '@/types/index'
-import { vMaska } from 'maska'
+// import { vMaska } from 'maska'
 import type { MaskOptions } from 'maska'
 import type { VForm } from 'vuetify/components'
 import { steps } from '@/consts/'
@@ -70,7 +68,7 @@ const model_data: Ref<Application.Person> = ref({
 
 const name_place_rules: [(val: string) => string | boolean] = [
   (val) => {
-    const name_error = 'Недопустимый формат имени'
+    const name_error = 'Недопустимый формат'
     if (!val) {
       return false
     }
@@ -120,6 +118,9 @@ const date_rules: [(val: string) => string | boolean] = [
 const email_rules: [(val: string) => string | boolean] = [
   (val) => {
     const email_error = 'Невалидный email'
+    if (!val) {
+      return true
+    }
 
     if (val !== undefined && val !== null) {
       const pattern =
@@ -169,7 +170,8 @@ const inputs: Application.FormInput[] = [
   {
     model: 'email',
     rules: email_rules,
-    label: 'Email'
+    label: 'Email',
+    required: false
   }
 ]
 
