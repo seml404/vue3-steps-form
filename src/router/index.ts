@@ -4,33 +4,33 @@ import ConfirmationStep from '@/views/steps/ConfirmationStep.vue'
 import TermsStep from '@/views/steps/TermsStep.vue'
 import SignedStep from '@/views/steps/SignedStep.vue'
 import ValidationStep from '@/views/steps/ValidationStep.vue'
-import { StepNamesEng } from '@/enums'
+import { StepNames } from '@/enums'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: StepNamesEng.PERSONAL_DATA,
+      name: StepNames.StepNamesEng.PERSONAL_DATA,
       component: PersonalDataStep
     },
     {
-      path: `/${StepNamesEng.CONFIRMATION}`,
-      name: StepNamesEng.CONFIRMATION,
+      path: `/${StepNames.StepNamesEng.CONFIRMATION}`,
+      name: StepNames.StepNamesEng.CONFIRMATION,
       component: ConfirmationStep
     },
     {
-      path: `/${StepNamesEng.TERMS}`,
-      name: StepNamesEng.TERMS,
+      path: `/${StepNames.StepNamesEng.TERMS}`,
+      name: StepNames.StepNamesEng.TERMS,
       component: TermsStep
     },
     {
-      path: `/${StepNamesEng.VALIDATION}`,
-      name: StepNamesEng.VALIDATION,
+      path: `/${StepNames.StepNamesEng.VALIDATION}`,
+      name: StepNames.StepNamesEng.VALIDATION,
       component: ValidationStep
     },
     {
-      path: `/${StepNamesEng.SIGNED}`,
-      name: StepNamesEng.SIGNED,
+      path: `/${StepNames.StepNamesEng.SIGNED}`,
+      name: StepNames.StepNamesEng.SIGNED,
       component: SignedStep
     }
   ]

@@ -19,9 +19,10 @@
 <script setup lang="ts">
 import { ref, computed, Ref } from 'vue'
 import { StepNamesRus as step_names } from '@/enums'
-import type { Application } from '@/types/index'
-import { steps_amount } from '@/consts'
-const props = defineProps<{ step: Application.Step }>()
+import type { Steps } from '@/types/index'
+import { StepsData } from '@/consts'
+const { steps_amount } = StepsData
+const props = defineProps<{ step: Steps.Step }>()
 </script>
 <script lang="ts">
 export default {

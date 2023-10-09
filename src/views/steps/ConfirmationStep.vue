@@ -32,7 +32,8 @@ import { mock_code } from '@/mock'
 import { ref, onMounted, onUnmounted } from 'vue'
 import type { Ref } from 'vue'
 import StepHeader from '@/components/steps/StepHeader.vue'
-import { steps } from '@/consts'
+import { StepsData } from '@/consts'
+const { steps } = StepsData
 const sec_counter: Ref<number> = ref(80)
 const sec_interval: Ref<number | null> = ref(null)
 const model_data: Ref<{ code: number | null }> = ref({ code: null })

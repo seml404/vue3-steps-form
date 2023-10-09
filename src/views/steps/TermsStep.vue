@@ -16,11 +16,15 @@
 </template>
 
 <script lang="ts" setup>
-import { mock_terms } from '@/mock'
+import { StepsMock } from '@/mock'
 import { ref, onMounted, onUnmounted } from 'vue'
 import type { Ref } from 'vue'
 import StepHeader from '@/components/steps/StepHeader.vue'
-import { steps } from '@/consts'
+import { StepsData } from '@/consts'
+
+const { mock_terms } = StepsMock
+
+const { steps } = StepsData
 
 const sign = () => {
   console.log('sign')

@@ -50,14 +50,15 @@ import StepHeader from '@/components/steps/StepHeader.vue'
 import { ref, computed } from 'vue'
 import { StepNames } from '@/enums'
 import type { Ref } from 'vue'
-import type { Application } from '@/types/index'
+import type { Steps } from '@/types/index'
 // import { vMaska } from 'maska'
 import type { MaskOptions } from 'maska'
 import type { VForm } from 'vuetify/components'
-import { steps } from '@/consts/'
+import { StepsData } from '@/consts/'
+const { steps } = StepsData
 const form = ref()
 const valid = ref(false)
-const model_data: Ref<Application.Person> = ref({
+const model_data: Ref<Steps.Person> = ref({
   first_name: '',
   second_name: '',
   birth_date: '',
@@ -131,10 +132,10 @@ const email_rules: [(val: string) => string | boolean] = [
     return true
   }
 ]
-const options: { [key: keyof Application.Person]: MaskOptions } = {
+const options: { [key: keyof Steps.Person]: MaskOptions } = {
   birth_date: { mask: '##.##.####' }
 }
-const inputs: Application.FormInput[] = [
+const inputs: Steps.FormInput[] = [
   {
     model: 'second_name',
     rules: name_place_rules,
