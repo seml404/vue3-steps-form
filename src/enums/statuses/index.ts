@@ -1,5 +1,5 @@
-export namespace ResponseStatuses {
-  export enum Success {
+export namespace Statuses {
+  export enum ResponseStatuses {
     OK = 200
   }
 }

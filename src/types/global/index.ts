@@ -1,9 +1,11 @@
+import { Requests } from '@/enums'
+
 export interface RequestProps {
-  method: 'GET' | 'POST' | 'DELETE' | 'PUT' | 'PATCH'
+  method: Requests.Types
   url: string
 }
 
-export interface RequesParams {
+export interface RequestParams {
   [key: string]: unknown
 }
 
@@ -18,3 +20,8 @@ export type InputValidation =
   | 'lazy input'
   | 'lazy blur'
   | 'lazy submit'
+
+export interface BaseResponse {
+  [key: string]: unknown
+  success: boolean
+}

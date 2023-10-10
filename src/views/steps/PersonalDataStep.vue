@@ -40,7 +40,7 @@
         Даю согласие на <a class="link">обработку личных данных </a> и подписание документов в
         электронном виде
       </div>
-      <div><v-btn color="danger"> Продолжить </v-btn></div>
+      <div><v-btn color="danger" @click="handle_submit"> Продолжить </v-btn></div>
     </v-container>
   </v-form>
 </template>
@@ -55,6 +55,8 @@ import type { Steps } from '@/types/index'
 import type { MaskOptions } from 'maska'
 import type { VForm } from 'vuetify/components'
 import { StepsData } from '@/consts/'
+import { useStepsStore } from '@/stores'
+const store = useStepsStore()
 const { steps } = StepsData
 const form = ref()
 const valid = ref(false)
@@ -177,6 +179,10 @@ const inputs: Steps.FormInput[] = [
 ]
 
 const agreement = ref(false)
+
+const handle_submit = async () => {
+  await store.submit_personal_data(model_data.value)
+}
 </script>
 
 <script lang="ts">

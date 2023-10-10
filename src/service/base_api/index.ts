@@ -1,21 +1,18 @@
-import { Axios } from '@/api/index'
+import axios from 'axios'
 import { qs } from 'qs'
-import type { RequestProps, RequesParams } from '@/types'
-import { ResponseStatuses } from '@/enums'
+import type { RequestProps, RequestParams } from '@/types'
 import type { AxiosInstance } from 'axios'
 
-export const requestWithParams = (props: RequestProps, params: RequesParams) => {
-  const { method, url } = props
-  const requestDetails = {
-    url,
-    method,
-    params,
+const base_api_constructor = (): AxiosInstance => {
+  const default_settings = {
     headers: {
       'Content-Type': 'application/json',
       Authorization: 'Bearer 12345'
-    },
-    paramsSerializer: (params: RequesParams) => qs.stringify(params, { arrayFormat: 'brakets' })
+    }
   }
+  const axios_instance = axios.create(default_settings)
 
-  return Axios(requestDetails)
+  return axios_instance
 }
+
+export const base_api = base_api_constructor()
