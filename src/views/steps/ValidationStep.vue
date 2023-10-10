@@ -13,6 +13,14 @@
 <script lang="ts" setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import type { Ref } from 'vue'
+import router from '@/router'
+import { StepNames } from '@/enums'
+
+onMounted(() => {
+  setTimeout(() => {
+    router.push(StepNames.StepNamesEng.SIGNED)
+  }, 700)
+})
 </script>
 
 <script lang="ts">

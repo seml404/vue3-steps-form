@@ -10,24 +10,34 @@
       </tbody>
     </v-table>
     <div class="btn-container">
-      <BtnMain @click="sign">Подписать договор</BtnMain>
+      <BtnMain @click="handle_sign">{{
+        store.passed_steps.agreement_signed ? 'Перейти к следующему шагу' : 'Подписать договор'
+      }}</BtnMain>
     </div>
   </v-container>
 </template>
 
 <script lang="ts" setup>
 import { StepsMock } from '@/mock'
-import { ref, onMounted, onUnmounted } from 'vue'
 import type { Ref } from 'vue'
 import StepHeader from '@/components/steps/StepHeader.vue'
 import { StepsData } from '@/consts'
-
+import { useStepsStore } from '@/stores'
+import { StepNames, Statuses } from '@/enums'
+import router from '@/router'
 const { mock_terms } = StepsMock
-
+const { ResponseStatuses: response_statuses } = Statuses
+const store = useStepsStore()
 const { steps } = StepsData
 
-const sign = () => {
-  console.log('sign')
+const handle_sign = async () => {
+  if (!store.passed_steps.agreement_signed) {
+    const code = await store.submit_agreement({ agreement_signed: true })
+    if (code === response_statuses.OK || code === response_statuses.UPDATED) {
+      console.log(code)
+      router.push(StepNames.StepNamesEng.VALIDATION)
+    }
+  } else router.push(StepNames.StepNamesEng.VALIDATION)
 }
 </script>
 
@@ -43,6 +53,7 @@ export default {
 }
 
 .btn-container{
+  padding-top: 10px;
   display: flex;
   justify-content: center;
   align-items: center;

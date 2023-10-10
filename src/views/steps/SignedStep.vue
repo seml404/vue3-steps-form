@@ -20,7 +20,7 @@
       <p class="info-step__text">Ожидайте поступления денежных средств</p>
 
       <div class="btn-container">
-        <BtnMain @click="validate">OK</BtnMain>
+        <BtnMain @click="handle_reset">OK</BtnMain>
       </div>
     </v-container>
   </div>
@@ -29,6 +29,15 @@
 <script lang="ts" setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import type { Ref } from 'vue'
+import router from '@/router'
+import { useStepsStore } from '@/stores'
+import { StepNames, Statuses } from '@/enums'
+const store = useStepsStore()
+
+const handle_reset = () => {
+  store.reset_data()
+  router.push('/')
+}
 </script>
 
 <script lang="ts">

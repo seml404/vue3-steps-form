@@ -10,7 +10,11 @@ export namespace Steps {
     birth_date: string
     birth_place: string
     middle_name: string
-    email?: string
+    email: string
+    user_id: number
+    agreed_handling: boolean
+    identification_confirmed: boolean
+    agreement_signed: boolean
   }
   export interface FormInput {
     model: keyof Person

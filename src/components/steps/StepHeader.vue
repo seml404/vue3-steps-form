@@ -2,7 +2,12 @@
   <div class="step__header">
     <h1 class="step__title">{{ step_names[step.step_name] }}</h1>
     <div v-if="step.number !== 3 && step.number < 4">
-      <v-progress-linear class="step__progress" color="green" model-value="20"></v-progress-linear>
+      <v-progress-linear
+        height="9"
+        class="step__progress"
+        color="green"
+        :model-value="steps_amount"
+      ></v-progress-linear>
       <div class="step__box">
         <p class="font-weight-bold">Шаг {{ step.number }} из {{ steps_amount }}</p>
         <p class="text-grey">
@@ -45,6 +50,8 @@ export default {
 .step__progress {
   margin-bottom: 20px;
   border-radius: 10px;
+  height: 20px;
+  border-radius: 20px;
 }
 .step__box {
   display: flex;

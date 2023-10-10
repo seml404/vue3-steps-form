@@ -34,12 +34,24 @@
           ></v-text-field>
         </v-col>
       </v-row>
-      <p>Заполнить через Госуслуги</p>
+      <div class="personal-step__fill">
+        <p class="text-grey text-body-2">заполнить через</p>
+        <div class="personal-step__svg-box">
+          <a href="#"> <ServiceLogo></ServiceLogo></a>
+        </div>
+      </div>
+
       <div class="d-flex align-center">
-        <v-checkbox v-model="agreement" color="primary" value="primary" hide-details></v-checkbox>
         <div>
-          Даю согласие на <a class="link">обработку личных данных </a> и подписание документов в
-          электронном виде
+          <v-checkbox
+            v-model="model_data.agreed_handling"
+            color="primary"
+            hide-details
+          ></v-checkbox>
+        </div>
+        <div>
+          Даю согласие на <a class="link" href="#">обработку личных данных </a> и подписание
+          документов в электронном виде
         </div>
       </div>
 
@@ -52,6 +64,7 @@
 
 <script setup lang="ts">
 import StepHeader from '@/components/steps/StepHeader.vue'
+import ServiceLogo from '@/components/steps/ServiceLogo.vue'
 import { ref, computed } from 'vue'
 import { StepNames, Statuses } from '@/enums'
 import type { Ref } from 'vue'
@@ -178,22 +191,18 @@ const inputs: Steps.FormInput[] = [
   }
 ]
 
-const agreement = ref(false)
-
 const handle_submit = async () => {
-  console.log(store.personal_data_submitted)
-
   if (!is_equal(model_data.value, store.personal_data_submitted)) {
     const code = await store.submit_personal_data(model_data.value)
     if (code === response_statuses.OK || code === response_statuses.UPDATED) {
       console.log(code)
       router.push(StepNames.StepNamesEng.CONFIRMATION)
     }
-  } else if (store.form_was_ubmitted) router.push(StepNames.StepNamesEng.CONFIRMATION)
+  } else if (store.passed_steps.personal_data) router.push(StepNames.StepNamesEng.CONFIRMATION)
 }
 
 const can_submit = computed(() => {
-  return valid.value && agreement.value
+  return valid.value && model_data.value.agreed_handling
 })
 </script>
 
@@ -218,5 +227,16 @@ export default {
   align-items: center;
   padding-top: 30px;
   padding-bottom: 20px;
+}
+.personal-step__fill {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.personal-step__svg-box {
+  width: 100%;
+  max-width: 200px;
 }
 </style>

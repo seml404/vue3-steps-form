@@ -5,6 +5,7 @@
       <v-row>
         <v-col cols="12" md="4">
           <v-text-field
+            :disabled="store.passed_steps.confirmation"
             :key="input.label"
             v-model="model_data[input.model]"
             :rules="input.rules"
@@ -18,24 +19,37 @@
           ></v-text-field>
         </v-col>
       </v-row>
-      <div class="btn-container">
-        <BtnMain @click="validate" :disabled="!valid">Проверить код</BtnMain>
+      <div v-if="!store.passed_steps.confirmation">
+        <div class="btn-container">
+          <BtnMain @click="handle_submit" :disabled="!valid">Проверить код</BtnMain>
+        </div>
+        <div v-if="sec_counter" class="text-body-2">
+          <p>Отправить код повторно через</p>
+          <p>{{ sec_counter }} секунд</p>
+        </div>
+        <v-btn v-else>Отправить код</v-btn>
       </div>
-      <div v-if="sec_counter">
-        <p>Отправить код повторно через</p>
-        <p>{{ sec_counter }} секунд</p>
+      <div v-else>
+        <div class="btn-container">
+          <BtnMain @click="handle_submit">Перейти к следующему шагу</BtnMain>
+        </div>
       </div>
-      <v-btn v-else>Отправить код</v-btn>
     </v-container>
   </v-form>
 </template>
 
 <script lang="ts" setup>
 import { mock_code } from '@/mock'
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import type { Ref } from 'vue'
 import StepHeader from '@/components/steps/StepHeader.vue'
 import { StepsData } from '@/consts'
+import { useStepsStore } from '@/stores'
+import { StepNames, Statuses } from '@/enums'
+import router from '@/router'
+
+const { ResponseStatuses: response_statuses } = Statuses
+const store = useStepsStore()
 const { steps } = StepsData
 const sec_counter: Ref<number> = ref(80)
 const sec_interval: Ref<number | null> = ref(null)
@@ -48,9 +62,17 @@ const input = {
   rules: [(el) => !!el?.trim()]
 }
 
-const validate = () => {
-  console.log(model_data.value)
-  console.log('validated')
+const code_required = computed(() => {
+  return !store.passed_steps.confirmation
+})
+const handle_submit = async () => {
+  if (!store.passed_steps.confirmation) {
+    const code = await store.submit_confirmation(model_data.value.code)
+    if (code === response_statuses.OK || code === response_statuses.UPDATED) {
+      console.log(code)
+      router.push(StepNames.StepNamesEng.TERMS)
+    }
+  } else router.push(StepNames.StepNamesEng.TERMS)
 }
 
 onMounted(() => {
