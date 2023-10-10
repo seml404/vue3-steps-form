@@ -19,10 +19,13 @@
         </v-col>
       </v-row>
       <div class="btn-container">
-        <BtnMain @click="validate">Проверить код</BtnMain>
+        <BtnMain @click="validate" :disabled="!valid">Проверить код</BtnMain>
       </div>
-      <p>Отправить код повторно через</p>
-      <p>{{ sec_counter }} секунд</p>
+      <div v-if="sec_counter">
+        <p>Отправить код повторно через</p>
+        <p>{{ sec_counter }} секунд</p>
+      </div>
+      <v-btn v-else>Отправить код</v-btn>
     </v-container>
   </v-form>
 </template>
@@ -41,10 +44,12 @@ const valid = ref(false)
 const input = {
   model: 'code',
   label: 'Код*',
-  required: true
+  required: true,
+  rules: [(el) => !!el?.trim()]
 }
 
 const validate = () => {
+  console.log(model_data.value)
   console.log('validated')
 }
 
@@ -68,11 +73,13 @@ export default {
 <style scoped lang="scss  ">
 .container {
   background: #fff;
+
 }
 
 .btn-container{
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
 }
 </style>

@@ -53,26 +53,21 @@
 <script setup lang="ts">
 import StepHeader from '@/components/steps/StepHeader.vue'
 import { ref, computed } from 'vue'
-import { StepNames } from '@/enums'
+import { StepNames, Statuses } from '@/enums'
 import type { Ref } from 'vue'
 import type { Steps } from '@/types/index'
-// import { vMaska } from 'maska'
 import type { MaskOptions } from 'maska'
 import type { VForm } from 'vuetify/components'
 import { StepsData } from '@/consts/'
 import { useStepsStore } from '@/stores'
+import router from '@/router'
+import { is_equal } from '@/utils'
+const { ResponseStatuses: response_statuses } = Statuses
 const store = useStepsStore()
 const { steps } = StepsData
 const form = ref()
 const valid = ref(false)
-const model_data: Ref<Steps.Person> = ref({
-  first_name: '',
-  second_name: '',
-  birth_date: '',
-  birth_place: '',
-  middle_name: '',
-  email: ''
-})
+const model_data: Ref<Steps.Person> = ref({ ...store.personal_data_submitted })
 
 const name_place_rules: [(val: string) => string | boolean] = [
   (val) => {
@@ -186,7 +181,15 @@ const inputs: Steps.FormInput[] = [
 const agreement = ref(false)
 
 const handle_submit = async () => {
-  await store.submit_personal_data(model_data.value)
+  console.log(store.personal_data_submitted)
+
+  if (!is_equal(model_data.value, store.personal_data_submitted)) {
+    const code = await store.submit_personal_data(model_data.value)
+    if (code === response_statuses.OK || code === response_statuses.UPDATED) {
+      console.log(code)
+      router.push(StepNames.StepNamesEng.CONFIRMATION)
+    }
+  } else if (store.form_was_ubmitted) router.push(StepNames.StepNamesEng.CONFIRMATION)
 }
 
 const can_submit = computed(() => {

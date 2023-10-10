@@ -21,7 +21,8 @@ export type InputValidation =
   | 'lazy blur'
   | 'lazy submit'
 
-export interface BaseResponse {
+export interface BaseResponse<T> {
   [key: string]: unknown
-  success: boolean
+  status: number
+  data: T
 }
