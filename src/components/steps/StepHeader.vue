@@ -1,10 +1,10 @@
 <template>
   <div class="step__header">
-    <p class="step__title">{{ step_names[step.step_name] }}</p>
+    <h1 class="step__title">{{ step_names[step.step_name] }}</h1>
     <v-progress-linear class="step__progress" color="green" model-value="20"></v-progress-linear>
     <div class="step__box" v-if="step.number !== 3 && step.number < 4">
-      <p>Шаг {{ step.number }} из {{ steps_amount }}</p>
-      <p>
+      <p class="font-weight-bold">Шаг {{ step.number }} из {{ steps_amount }}</p>
+      <p class="text-grey">
         {{
           step_names[step.next_step_name]
             ? `Следующий шаг: ${step_names[step.next_step_name]}`

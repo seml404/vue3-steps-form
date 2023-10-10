@@ -35,12 +35,17 @@
         </v-col>
       </v-row>
       <p>Заполнить через Госуслуги</p>
-      <v-checkbox v-model="agreement" color="primary" value="primary" hide-details></v-checkbox>
-      <div>
-        Даю согласие на <a class="link">обработку личных данных </a> и подписание документов в
-        электронном виде
+      <div class="d-flex align-center">
+        <v-checkbox v-model="agreement" color="primary" value="primary" hide-details></v-checkbox>
+        <div>
+          Даю согласие на <a class="link">обработку личных данных </a> и подписание документов в
+          электронном виде
+        </div>
       </div>
-      <div><v-btn color="danger" @click="handle_submit"> Продолжить </v-btn></div>
+
+      <div class="btn-container">
+        <BtnMain @click="handle_submit" :disabled="!can_submit">Продолжить</BtnMain>
+      </div>
     </v-container>
   </v-form>
 </template>
@@ -183,6 +188,10 @@ const agreement = ref(false)
 const handle_submit = async () => {
   await store.submit_personal_data(model_data.value)
 }
+
+const can_submit = computed(() => {
+  return valid.value && agreement.value
+})
 </script>
 
 <script lang="ts">
@@ -199,5 +208,12 @@ export default {
 }
 .container {
   background: #fff;
+}
+.btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30px;
+  padding-bottom: 20px;
 }
 </style>
