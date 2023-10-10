@@ -3,7 +3,7 @@
     <v-container class="container">
       <StepHeader :step="steps[0]" />
       <v-row>
-        <v-col cols="12" md="4">
+        <v-col cols="12" sm="6" class="pb-0">
           <v-text-field
             v-for="input in inputs.slice(0, 3)"
             :key="input.label"
@@ -18,7 +18,7 @@
             variant="outlined"
           ></v-text-field>
         </v-col>
-        <v-col cols="12" md="4">
+        <v-col cols="12" sm="6" class="pb-0">
           <v-text-field
             v-for="input in inputs.slice(3)"
             :key="input.label"
