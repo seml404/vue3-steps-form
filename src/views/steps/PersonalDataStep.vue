@@ -108,6 +108,8 @@ const date_rules: [(val: string) => string | boolean] = [
       return date_error
     }
 
+    // ошибка была из-за мутации массива методом reverse()
+
     if (new Date([...date_arr].reverse().join('-')).getTime() >= Date.now()) {
       return date_error
     }
