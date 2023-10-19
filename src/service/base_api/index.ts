@@ -1,6 +1,4 @@
 import axios from 'axios'
-import { qs } from 'qs'
-import type { RequestProps, RequestParams } from '@/types'
 import type { AxiosInstance } from 'axios'
 
 const base_api_constructor = (): AxiosInstance => {

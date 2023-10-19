@@ -1,7 +1,5 @@
 import { base_api } from '../base_api'
-import { Statuses, Requests } from '@/enums'
-import type { AxiosInstance } from 'axios'
-import type { BaseResponse, Steps, RequestProps } from '@/types'
+import type { BaseResponse, Steps } from '@/types'
 import { StepsMock } from '@/mock'
 
 interface StepsData {

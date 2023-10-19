@@ -104,11 +104,11 @@ const date_rules: [(val: string) => string | boolean] = [
     }
     const date_arr = birth_date.split('.')
 
-    if (
-      !date_arr.length ||
-      date_arr.length < 3 ||
-      new Date(date_arr.join('-')).getTime() >= Date.now()
-    ) {
+    if (date_arr.length < 3) {
+      return date_error
+    }
+
+    if (new Date([...date_arr].reverse().join('-')).getTime() >= Date.now()) {
       return date_error
     }
     const day = Number(date_arr[0]) || ''

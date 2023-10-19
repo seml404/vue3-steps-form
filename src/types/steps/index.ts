@@ -1,5 +1,4 @@
 import type { MaskOptions } from 'maska'
-import type { VValidation } from 'vuetify/components'
 import { StepNames } from '@/enums'
 import type { InputValidation } from '../index'
 
