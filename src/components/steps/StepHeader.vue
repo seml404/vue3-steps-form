@@ -10,7 +10,7 @@
       ></v-progress-linear>
       <div class="step__box">
         <p class="font-weight-bold">Шаг {{ step.number }} из {{ steps_amount }}</p>
-        <p class="text-grey">
+        <p class="text-grey" v-if="step.next_step_name">
           {{
             step_names[step.next_step_name]
               ? `Следующий шаг: ${step_names[step.next_step_name]}`

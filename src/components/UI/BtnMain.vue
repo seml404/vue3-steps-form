@@ -1,5 +1,5 @@
 <template>
-  <v-btn :class="['text-none', 'btn_main']" color="red" text="none" variant="flat">
+  <v-btn :class="['text-none', 'btn-main']" color="red" text="none" variant="flat">
     <slot></slot>
   </v-btn>
 </template>
@@ -12,7 +12,7 @@ export default {
 </script>
 
 <style>
-.btn_main {
+.btn-main {
   padding: 10px;
   display: flex;
   width: 100%;
