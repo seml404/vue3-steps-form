@@ -1,5 +1,5 @@
 <template>
-  <v-wrapper class="wrapper">
+  <v-container class="wrapper">
     <StepHeader :step="steps[4]" />
     <v-table>
       <tbody>
@@ -14,7 +14,7 @@
         store.passed_steps.agreement_signed ? 'Перейти к следующему шагу' : 'Подписать договор'
       }}</BtnMain>
     </div>
-  </v-wrapper>
+  </v-container>
 </template>
 
 <script lang="ts" setup>

@@ -1,12 +1,12 @@
 <template>
   <div class="info-step">
-    <v-wrapper class="wrapper">
+    <v-container class="wrapper">
       <div class="info-step__progress-box">
         <v-progress-circular :size="100" color="red" :width="8" indeterminate></v-progress-circular>
       </div>
       <p class="info-step__text">Проверка ваших данных!</p>
       <p class="info-step__text">Это займет до 30 минут!</p>
-    </v-wrapper>
+    </v-container>
   </div>
 </template>
 

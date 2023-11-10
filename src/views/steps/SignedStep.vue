@@ -1,6 +1,6 @@
 <template>
   <div class="info-step">
-    <v-wrapper class="wrapper">
+    <v-container class="wrapper">
       <div class="info-step__svg-box">
         <svg
           class="info-step__svg"
@@ -22,7 +22,7 @@
       <div class="btn-wrapper">
         <BtnMain @click="handle_reset">OK</BtnMain>
       </div>
-    </v-wrapper>
+    </v-container>
   </div>
 </template>
 

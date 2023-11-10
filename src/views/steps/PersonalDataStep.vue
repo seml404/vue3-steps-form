@@ -1,6 +1,6 @@
 <template>
   <v-form v-model="valid" class="form" ref="form">
-    <v-wrapper class="wrapper">
+    <v-container class="wrapper">
       <StepHeader :step="steps[0]" />
       <v-row>
         <v-col cols="12" sm="6" class="pb-0">
@@ -58,7 +58,7 @@
       <div class="btn-wrapper">
         <BtnMain @click="handle_submit" :disabled="!can_submit">Продолжить</BtnMain>
       </div>
-    </v-wrapper>
+    </v-container>
   </v-form>
 </template>
 

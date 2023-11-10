@@ -1,6 +1,6 @@
 <template>
   <v-form v-model="valid" class="form" ref="form">
-    <v-wrapper class="wrapper">
+    <v-container class="wrapper">
       <StepHeader :step="steps[2]" />
       <v-row>
         <v-col cols="12" md="4">
@@ -34,7 +34,7 @@
           <BtnMain @click="handle_submit">Перейти к следующему шагу</BtnMain>
         </div>
       </div>
-    </v-wrapper>
+    </v-container>
   </v-form>
 </template>
 
