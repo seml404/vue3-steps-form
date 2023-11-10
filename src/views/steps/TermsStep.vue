@@ -1,5 +1,5 @@
 <template>
-  <v-container class="container">
+  <v-wrapper class="wrapper">
     <StepHeader :step="steps[4]" />
     <v-table>
       <tbody>
@@ -9,12 +9,12 @@
         </tr>
       </tbody>
     </v-table>
-    <div class="btn-container">
+    <div class="btn-wrapper">
       <BtnMain @click="handle_sign">{{
         store.passed_steps.agreement_signed ? 'Перейти к следующему шагу' : 'Подписать договор'
       }}</BtnMain>
     </div>
-  </v-container>
+  </v-wrapper>
 </template>
 
 <script lang="ts" setup>
@@ -47,12 +47,12 @@ export default {
 }
 </script>
 
-<style scoped lang="scss  ">
-.container {
+<style scoped lang="scss">
+.wrapper {
   background: #fff;
 }
 
-.btn-container{
+.btn-wrapper{
   padding-top: 10px;
   display: flex;
   justify-content: center;

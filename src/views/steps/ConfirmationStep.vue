@@ -1,6 +1,6 @@
 <template>
   <v-form v-model="valid" class="form" ref="form">
-    <v-container class="container">
+    <v-wrapper class="wrapper">
       <StepHeader :step="steps[2]" />
       <v-row>
         <v-col cols="12" md="4">
@@ -20,7 +20,7 @@
         </v-col>
       </v-row>
       <div v-if="!store.passed_steps.confirmation">
-        <div class="btn-container">
+        <div class="btn-wrapper">
           <BtnMain @click="handle_submit" :disabled="!valid">Проверить код</BtnMain>
         </div>
         <div v-if="sec_counter" class="text-body-2">
@@ -30,11 +30,11 @@
         <v-btn v-else>Отправить код</v-btn>
       </div>
       <div v-else>
-        <div class="btn-container">
+        <div class="btn-wrapper">
           <BtnMain @click="handle_submit">Перейти к следующему шагу</BtnMain>
         </div>
       </div>
-    </v-container>
+    </v-wrapper>
   </v-form>
 </template>
 
@@ -52,7 +52,7 @@ const { ResponseStatuses: response_statuses } = Statuses
 const store = useStepsStore()
 const { steps } = StepsData
 const sec_counter: Ref<number> = ref(80)
-const sec_interval: Ref<number | null> = ref(null)
+const sec_interval: Ref<ReturnType<typeof setInterval> | null> = ref(null)
 const model_data: Ref<{ code: number | null }> = ref({ code: null })
 const valid = ref(false)
 const input = {
@@ -82,7 +82,9 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  clearInterval(sec_interval.value)
+  if (sec_interval.value !== null) {
+    clearInterval(sec_interval.value)
+  }
 })
 </script>
 
@@ -93,11 +95,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.container {
+.wrapper {
   background: #fff;
 }
 
-.btn-container{
+.btn-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;

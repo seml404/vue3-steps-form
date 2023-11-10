@@ -1,6 +1,6 @@
 <template>
   <v-form v-model="valid" class="form" ref="form">
-    <v-container class="container">
+    <v-wrapper class="wrapper">
       <StepHeader :step="steps[0]" />
       <v-row>
         <v-col cols="12" sm="6" class="pb-0">
@@ -55,10 +55,10 @@
         </div>
       </div>
 
-      <div class="btn-container">
+      <div class="btn-wrapper">
         <BtnMain @click="handle_submit" :disabled="!can_submit">Продолжить</BtnMain>
       </div>
-    </v-container>
+    </v-wrapper>
   </v-form>
 </template>
 
@@ -220,10 +220,10 @@ export default {
 .form__input {
   margin-bottom: 10px;
 }
-.container {
+.wrapper {
   background: #fff;
 }
-.btn-container {
+.btn-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;

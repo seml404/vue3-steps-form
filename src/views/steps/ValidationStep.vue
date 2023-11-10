@@ -1,12 +1,12 @@
 <template>
   <div class="info-step">
-    <v-container class="container">
+    <v-wrapper class="wrapper">
       <div class="info-step__progress-box">
         <v-progress-circular :size="100" color="red" :width="8" indeterminate></v-progress-circular>
       </div>
       <p class="info-step__text">Проверка ваших данных!</p>
       <p class="info-step__text">Это займет до 30 минут!</p>
-    </v-container>
+    </v-wrapper>
   </div>
 </template>
 
@@ -34,7 +34,7 @@ export default {
   text-align: center;
 }
 
-.container {
+.wrapper {
   background: #fff;
   padding-bottom: 200px;
 }

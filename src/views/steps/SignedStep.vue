@@ -1,6 +1,6 @@
 <template>
   <div class="info-step">
-    <v-container class="container">
+    <v-wrapper class="wrapper">
       <div class="info-step__svg-box">
         <svg
           class="info-step__svg"
@@ -19,10 +19,10 @@
       <p class="info-step__text">Договор подписан</p>
       <p class="info-step__text">Ожидайте поступления денежных средств</p>
 
-      <div class="btn-container">
+      <div class="btn-wrapper">
         <BtnMain @click="handle_reset">OK</BtnMain>
       </div>
-    </v-container>
+    </v-wrapper>
   </div>
 </template>
 
@@ -51,7 +51,7 @@ export default {
   text-align: center;
 }
 
-.container {
+.wrapper {
   background: #fff;
 }
 
@@ -68,7 +68,7 @@ export default {
   max-width: 100px;
 }
 
-.btn-container {
+.btn-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
