@@ -29,4 +29,4 @@ sudo docker run -d -p 3000:80 stepper
 
 ```
 
-check https://localhost:3000
+check http://localhost:3000/
