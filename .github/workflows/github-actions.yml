@@ -9,7 +9,5 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '21'
-      name: install modules
       - run: npm install
-      name: building an app
       - run: npm run build-only
